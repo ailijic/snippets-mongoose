@@ -1,0 +1,22 @@
+{
+  "name": "snippets-mongoose",
+  "version": "0.0.1",
+  "description": "snippets-mongoose",
+  "main": "snippets.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ailijic/snippets-mongoose.git"
+  },
+  "author": "ailijic",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/ailijic/snippets-mongoose/issues"
+  },
+  "homepage": "https://github.com/ailijic/snippets-mongoose#readme",
+  "dependencies": {
+    "mongoose": "^4.7.1"
+  }
+}
