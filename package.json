@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/ailijic/snippets-mongoose#readme",
   "dependencies": {
+    "mongodb": "^2.2.12",
     "mongoose": "^4.7.1"
   }
 }
