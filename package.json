@@ -4,7 +4,7 @@
   "description": "snippets-mongoose",
   "main": "snippets.js",
   "scripts": {
-    "test": "mocha"
+    "test": "ava"
   },
   "repository": {
     "type": "git",
@@ -17,7 +17,13 @@
   },
   "homepage": "https://github.com/ailijic/snippets-mongoose#readme",
   "dependencies": {
+    "ava": "^0.17.0",
+    "eslint": "^3.11.1",
+    "global": "^4.3.1",
     "mongodb": "^2.2.12",
     "mongoose": "^4.7.1"
+  },
+  "devDependencies": {
+    "ava": "^0.17.0"
   }
 }
