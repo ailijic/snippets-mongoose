@@ -6,13 +6,15 @@ mongoose.connection.on('error', err => {
   console.error('Could not connect. Error: ', err)
 })
 
+mongoose.connection.once('open', function () {
   var snippetSchema = mongoose.Schema({
-    name: {type: String, unique: true},
-    content: String
-  })
+     name: {type: String, unique: true},
+     content: String
+   })
 
   var Snippet = mongoose.model('Snippet', snippetSchema)
-  
+})
+
 var create = (name, content) => {
   var snippet = {
     name: name,
@@ -64,10 +66,3 @@ var del = (name, content) => {
     mongoose.disconnect()
   })
 }
-
-mongoose.connection.once('open', function () {
-  
-  
-create('person', 'Tim')
-console.log(read('person'))
-})
