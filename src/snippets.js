@@ -6,13 +6,15 @@ mongoose.connection.on('error', err => {
   console.error('Could not connect. Error: ', err)
 })
 
+var Snippet = undefined
+
 mongoose.connection.once('open', function () {
   var snippetSchema = mongoose.Schema({
-     name: {type: String, unique: true},
-     content: String
-   })
+    name: {type: String, unique: true},
+    content: String
+  })
 
-  var Snippet = mongoose.model('Snippet', snippetSchema)
+  Snippet = mongoose.model('Snippet', snippetSchema)
 })
 
 var create = (name, content) => {
@@ -31,7 +33,7 @@ var create = (name, content) => {
   })
 }
 
-var read = name => {
+var read = (name) => {
   Snippet.findOne({name: name}, (err, snippet) => {
     if (err || !snippet) {
       console.error('Could not read snippet', name)
@@ -55,7 +57,7 @@ var update = (name, content) => {
   })
 }
 
-var del = (name, content) => {
+var del = (name) => {
   Snippet.findOneAndRemove({name: name}, (err, snippet) => {
     if (err || !snippet) {
       console.error('Could not delete snippet', name)
@@ -65,4 +67,20 @@ var del = (name, content) => {
     console.log('Deleted snippet', snippet.name)
     mongoose.disconnect()
   })
+}
+
+main()
+function main () {
+  if (process.argv[2] == 'create') {
+    create(process.argv[3], process.argv[4])
+  } else if (process.argv[2] == 'read') {
+    read(process.argv[3])
+  } else if (process.argv[2] == 'update') {
+    update(process.argv[3], process.argv[4])
+  } else if (process.argv[2] == 'delete') {
+    del(process.argv[3])
+  } else {
+    console.error('Command not recognized')
+    mongoose.disconnect()
+  }
 }
