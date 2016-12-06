@@ -1,28 +1,28 @@
-var mongoose = require('mongoose')
+const mongoose = require('mongoose')
 mongoose.Promise = global.Promise
 mongoose.connect('mongodb://localhost/')
 
-mongoose.connection.on('error', err => {
+mongoose.connection.on('error', (err) => {
   console.error('Could not connect. Error: ', err)
 })
 
-mongoose.connection.once('open', function () {
-  var snippetSchema = mongoose.Schema({
+mongoose.connection.once('open', () => {
+  const snippetSchema = mongoose.Schema({
     name: {type: String, unique: true},
     content: String
   })
 
-  var Snippet = mongoose.model('Snippet', snippetSchema)
+  const Snippet = mongoose.model('Snippet', snippetSchema)
   start(Snippet)
 })
 
 function start (Snippet) {
-  var create = (name, content) => {
-    var snippet = {
+  const create = (name, content) => {
+    const snippet = {
       name: name,
       content: content
     }
-    Snippet.create(snippet, function (err, snippet) {
+    Snippet.create(snippet, (err, snippet) => {
       if (err || !snippet) {
         console.error('Could not create snippet', name)
         mongoose.disconnect()
@@ -33,7 +33,7 @@ function start (Snippet) {
     })
   }
 
-  var read = (name) => {
+  const read = (name) => {
     Snippet.findOne({name: name}, (err, snippet) => {
       if (err || !snippet) {
         console.error('Could not read snippet', name)
@@ -46,7 +46,7 @@ function start (Snippet) {
     })
   }
 
-  var update = (name, content) => {
+  const update = (name, content) => {
     Snippet.findOneAndUpdate({name: name}, {content: content},
     (err, snippet) => {
       if (err || !snippet) {
@@ -57,7 +57,7 @@ function start (Snippet) {
     })
   }
 
-  var del = (name) => {
+  const del = (name) => {
     Snippet.findOneAndRemove({name: name}, (err, snippet) => {
       if (err || !snippet) {
         console.error('Could not delete snippet', name)
